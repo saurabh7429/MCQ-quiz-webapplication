@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MCQ Quiz App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+
+        <h1>MCQ Quiz</h1>
+
+        <div class="header-controls">
+            <button id="resetBtn" title="Reset Quiz">🔄</button>
+            <button id="themeToggle" title="Toggle Theme">🌙</button>
+            <button id="fullscreenBtn" title="Fullscreen">⛶</button>
+        </div>
+
+    </header>
+
+
+    <!-- ===== LIVE STATS BAR ===== -->
+    <section class="stats-bar">
+
+        <div class="progress-info">
+            Question <span id="currentQ">1</span> /
+            <span id="totalQ">0</span>
+        </div>
+
+        <div class="score-info">
+            ✅ <span id="liveCorrect">0</span>
+            ❌ <span id="liveWrong">0</span>
+        </div>
+
+    </section>
+
+
+    <!-- ===== PROGRESS BAR ===== -->
+    <div class="progress-container">
+        <div id="progressFill"></div>
+    </div>
+
+
+    <!-- ===== QUIZ AREA ===== -->
+    <main class="quiz-area">
+
+        <div class="question-box">
+            <h2 id="question">Loading question...</h2>
+        </div>
+
+        <div id="options" class="options-container">
+            <!-- Options load here -->
+        </div>
+
+        <button id="nextBtn" class="next-btn" disabled>
+            Next Question →
+        </button>
+
+    </main>
+
+
+    <!-- ===== SCOREBOARD ===== -->
+    <section id="scoreboard" class="scoreboard hidden">
+
+        <h2>Quiz Completed 🎉</h2>
+
+        <div class="score-details">
+
+            <div class="score-item">
+                Total Questions
+                <span id="scoreTotal">0</span>
+            </div>
+
+            <div class="score-item correct-text">
+                Correct
+                <span id="scoreCorrect">0</span>
+            </div>
+
+            <div class="score-item wrong-text">
+                Wrong
+                <span id="scoreWrong">0</span>
+            </div>
+
+            <div class="score-item">
+                Percentage
+                <span id="scorePercent">0%</span>
+            </div>
+
+        </div>
+
+        <button id="restartBtn" class="restart-btn">
+            Restart Quiz
+        </button>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

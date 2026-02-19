@@ -1,0 +1,295 @@
+/* ===============================
+   ROOT THEME VARIABLES
+================================= */
+
+:root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --text: #1e293b;
+    --primary: #6366f1;
+    --correct: #22c55e;
+    --wrong: #ef4444;
+    --border: #e2e8f0;
+    --shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.dark {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f1f5f9;
+    --primary: #818cf8;
+    --border: #334155;
+    --shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   BASE RESET
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===============================
+   APP CONTAINER
+================================= */
+
+.app {
+    width: 100%;
+    max-width: 650px;
+}
+
+/* ===============================
+   HEADER
+================================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 1.6rem;
+}
+
+.header-controls button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    margin-left: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.header-controls button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* ===============================
+   STATS BAR
+================================= */
+
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.score-info {
+    font-weight: 600;
+}
+
+/* ===============================
+   PROGRESS BAR
+================================= */
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#progressFill {
+    height: 100%;
+    width: 0%;
+    background: var(--primary);
+    transition: width 0.4s ease;
+}
+
+/* ===============================
+   QUIZ AREA
+================================= */
+
+.quiz-area {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    transition: 0.3s ease;
+}
+
+.question-box h2 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* ===============================
+   OPTIONS
+================================= */
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.options-container button {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.options-container button:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.02);
+}
+
+/* Correct / Wrong States */
+
+.correct {
+    background: var(--correct) !important;
+    color: white !important;
+    border: none !important;
+    animation: pop 0.3s ease;
+}
+
+.wrong {
+    background: var(--wrong) !important;
+    color: white !important;
+    border: none !important;
+    animation: shake 0.3s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-4px); }
+    100% { transform: translateX(0); }
+}
+
+/* ===============================
+   NEXT BUTTON
+================================= */
+
+.next-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.next-btn:hover {
+    transform: scale(1.02);
+}
+
+.next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ===============================
+   SCOREBOARD
+================================= */
+
+.scoreboard {
+    background: var(--card);
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.score-details {
+    margin-top: 15px;
+}
+
+.score-item {
+    margin: 8px 0;
+    font-size: 15px;
+}
+
+.correct-text {
+    color: var(--correct);
+}
+
+.wrong-text {
+    color: var(--wrong);
+}
+
+.restart-btn {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.restart-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ===============================
+   UTILITIES
+================================= */
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   MOBILE OPTIMIZATION
+================================= */
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.3rem;
+    }
+
+    .options-container button {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .next-btn {
+        font-size: 13px;
+    }
+}
