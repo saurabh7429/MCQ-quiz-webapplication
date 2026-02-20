@@ -3,20 +3,20 @@
 ================================= */
 
 :root {
-    /* Professional palette (light) - Heavy & Rich */
-    --bg: #e8eef8; /* deeper light neutral */
-    --card: #f5f8fc;
-    --text: #0a0e1a; /* very dark navy */
-    --muted: #3d4a63;
-    --primary: #0052cc; /* deep saturated blue */
+    /* Professional & Modern Color Palette (Light) */
+    --bg: #f8fafb; /* clean white-gray */
+    --card: #ffffff;
+    --text: #1a202c; /* dark slate */
+    --muted: #718096;
+    --primary: #2563eb; /* vibrant professional blue */
     --btn-text: #ffffff;
-    --correct: #0891b2; /* deeper teal */
-    --wrong: #dc2626; /* deeper red */
-    --border: #cbd5e7;
-    --shadow: 0 14px 32px rgba(11,52,204,0.15);
-    --bg-grad-1: #dce5f4;
-    --bg-grad-2: #e8eef8;
-    --accent-glow: rgba(11,52,204,0.12);
+    --correct: #10b981; /* fresh emerald green */
+    --wrong: #ef4444; /* clean red */
+    --border: #e2e8f0;
+    --shadow: 0 10px 30px rgba(37,99,235,0.1);
+    --bg-grad-1: #f0f4f8;
+    --bg-grad-2: #f8fafb;
+    --accent-glow: rgba(37,99,235,0.08);
 }
 
 .dark {
@@ -91,25 +91,29 @@ body {
     padding: 11px 16px;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 8px 20px rgba(0,82,204,0.18);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.2);
     font-size: 16px;
     font-weight: 600;
 }
 
 .top-btn:hover {
-    transform: translateY(-3px);
-    opacity: 0.92;
-    box-shadow: 0 12px 32px rgba(0,82,204,0.25);
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.3);
 }
 
 .app-title {
     font-size: 2.2rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 32px;
     text-align: center;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.5px;
     color: var(--text);
+    background: linear-gradient(135deg, var(--primary) 0%, #065f46 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* ===============================
@@ -131,8 +135,8 @@ body {
     padding: 11px 18px;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 8px 20px rgba(0,82,204,0.18);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.2);
     font-size: 14px;
     font-weight: 700;
     flex: 1;
@@ -140,9 +144,9 @@ body {
 }
 
 .footer-controls button:hover {
-    transform: translateY(-3px);
-    opacity: 0.92;
-    box-shadow: 0 12px 32px rgba(0,82,204,0.25);
+    transform: translateY(-2px);
+    opacity: 0.95;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.3);
 }
 
 /* ===============================
@@ -156,11 +160,11 @@ body {
     margin-top: 16px;
     padding: 16px;
     font-size: 16px;
-    background: var(--card);
+    background: linear-gradient(135deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
     border-radius: 12px;
-    box-shadow: 0 10px 28px rgba(0,82,204,0.08);
+    box-shadow: 0 4px 12px rgba(37,99,235,0.08);
     animation: fadeIn 0.4s ease;
-    border: 1px solid rgba(11,52,204,0.08);
+    border: 1px solid var(--border);
 }
 
 .progress-info {
@@ -186,8 +190,8 @@ body {
     overflow: hidden;
     margin-bottom: 0;
     margin-top: 20px;
-    box-shadow: inset 0 2px 6px rgba(0,82,204,0.08);
-    border: 1px solid rgba(11,52,204,0.06);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
 }
 
 #progressFill {
@@ -205,11 +209,11 @@ body {
     background: var(--card);
     padding: 28px;
     border-radius: 16px;
-    box-shadow: 0 16px 40px rgba(0,82,204,0.1);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.08);
     transition: transform 280ms ease, box-shadow 280ms ease, opacity 280ms ease;
     animation: cardEnter 420ms cubic-bezier(.2,.9,.2,1);
     margin-bottom: 4px;
-    border: 1px solid rgba(11,52,204,0.08);
+    border: 1px solid var(--border);
 }
 
 .question-box h2 {
@@ -234,15 +238,15 @@ body {
 .options-container button {
     padding: 12px;
     border-radius: 10px;
-    border: 1.5px solid var(--border);
+    border: 1px solid var(--border);
     background: transparent;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     font-size: 14px;
     width: 100%;
     text-align: left;
     color: var(--text);
-    box-shadow: 0 8px 20px rgba(0,82,204,0.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     transform-origin: left center;
     font-weight: 500;
 }
@@ -250,8 +254,8 @@ body {
 .options-container button:hover {
     background: var(--primary);
     color: var(--btn-text);
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 16px 36px rgba(0,82,204,0.15);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 8px 20px rgba(37,99,235,0.25);
     border-color: var(--primary);
 }
 
@@ -259,16 +263,18 @@ body {
 
 .correct {
     background: var(--correct) !important;
-    color: var(--btn-text) !important;
+    color: #ffffff !important;
     border: none !important;
     animation: pop 0.3s ease;
+    box-shadow: 0 8px 20px rgba(16,185,129,0.3) !important;
 }
 
 .wrong {
     background: var(--wrong) !important;
-    color: var(--btn-text) !important;
+    color: #ffffff !important;
     border: none !important;
     animation: shake 0.3s ease;
+    box-shadow: 0 8px 20px rgba(239,68,68,0.3) !important;
 }
 
 @keyframes pop {
@@ -295,18 +301,18 @@ body {
     padding: 14px;
     border-radius: 12px;
     border: none;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, #1d4ed8 100%);
     color: var(--btn-text);
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 12px 28px rgba(0,82,204,0.18);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.2);
 }
 
 .next-btn:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 16px 40px rgba(0,82,204,0.25);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.3);
 }
 
 .next-btn:disabled {
@@ -323,10 +329,10 @@ body {
     padding: 25px;
     border-radius: 16px;
     text-align: center;
-    box-shadow: 0 16px 40px rgba(0,82,204,0.1);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.08);
     margin-top: 20px;
     animation: fadeIn 0.4s ease;
-    border: 1px solid rgba(11,52,204,0.08);
+    border: 1px solid var(--border);
 }
 
 .score-details {
@@ -353,17 +359,17 @@ body {
     padding: 12px 20px;
     border-radius: 10px;
     border: none;
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, #1d4ed8 100%);
     color: var(--btn-text);
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: 0.3s ease;
     font-weight: 700;
-    box-shadow: 0 8px 20px rgba(0,82,204,0.18);
+    box-shadow: 0 4px 12px rgba(37,99,235,0.2);
 }
 
 .restart-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 12px 32px rgba(0,82,204,0.25);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.3);
 }
 
 /* ===============================
@@ -394,23 +400,23 @@ body {
 @media (max-width: 768px) {
     body { padding: 8px; }
     .app { max-width: 100%; min-height: 100vh; }
-    .header { margin-bottom: 20px; gap: 8px; }
+    .header { margin-bottom: 20px; gap: 8px; display: flex; }
     .app-title { font-size: 1.7rem; margin-bottom: 24px; }
     .quiz-area { border-radius: 12px; padding: 18px; margin-bottom: 2px; }
     .options-container { gap: 12px; margin-bottom: 18px; }
-    .top-btn { padding: 10px 12px; font-size: 15px; flex: 1; }
-    .footer-controls { gap: 8px; }
-    .footer-controls button { padding: 10px 12px; font-size: 13px; }
+    .top-btn { padding: 12px 14px; font-size: 15px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .footer-controls { gap: 8px; display: flex; }
+    .footer-controls button { padding: 12px 14px; font-size: 13px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .stats-bar { font-size: 14px; padding: 12px; }
 }
 
 /* Extra large spacing for single-button mobile view */
 @media (max-width: 480px) {
     .app-title { font-size: 1.5rem; margin-bottom: 20px; }
-    .header { margin-bottom: 16px; gap: 6px; }
-    .top-btn { padding: 10px; font-size: 14px; flex: 1; }
-    .footer-controls { margin-top: 16px; gap: 6px; }
-    .footer-controls button { padding: 10px; font-size: 13px; }
+    .header { margin-bottom: 16px; gap: 6px; display: flex; }
+    .top-btn { padding: 12px; font-size: 14px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .footer-controls { margin-top: 16px; gap: 6px; display: flex; }
+    .footer-controls button { padding: 12px; font-size: 13px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .quiz-area { padding: 16px; }
     .question-box h2 { font-size: 1.1rem; margin-bottom: 20px; }
     .options-container button { padding: 16px; font-size: 15px; border-radius: 12px; }
