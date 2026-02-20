@@ -23,6 +23,7 @@ const elOptions = $('#options');
 const elNext = $('#nextBtn');
 const elRestart = $('#restartBtn');
 const elReset = $('#resetBtn');
+const orderToggle = $('#orderToggle');
 
 const elCurrentQ = $('#currentQ');
 const elTotalQ = $('#totalQ');
@@ -47,6 +48,8 @@ let idx = 0;
 let correct = 0;
 let wrong = 0;
 let answeredFlag = false;
+// default to linear (static) order unless user enabled shuffle
+let orderMode = localStorage.getItem('mcq_order') || 'static';
 
 /* ====== Helpers ====== */
 // Fisher-Yates shuffle (non-destructive)
@@ -85,11 +88,19 @@ async function loadQuestions() {
 
 /* ====== Init / Start ====== */
 function initQuiz() {
-  // shuffle master set and copy options shuffled
-  questions = shuffle(allQuestions).map(q => ({
-    ...q,
-    options: shuffle(q.options || [])
-  }));
+  // prepare working set according to order mode and shuffle options only
+  if (orderMode === 'random') {
+    questions = shuffle(allQuestions).map(q => ({
+      ...q,
+      options: shuffle(q.options || [])
+    }));
+  } else {
+    // static: keep original order, but shuffle options per question
+    questions = allQuestions.map(q => ({
+      ...q,
+      options: shuffle(q.options || [])
+    }));
+  }
 
   idx = 0;
   correct = 0;
@@ -121,6 +132,8 @@ function renderQuestion() {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'option';
+    b.setAttribute('role', 'option');
+    b.setAttribute('tabindex', '-1');
     b.innerHTML = safeText(opt);
     b.style.transform = 'scale(0.98)';
     b.style.opacity = '0';
@@ -134,6 +147,12 @@ function renderQuestion() {
     b.addEventListener('click', () => chooseOption(b, opt));
     elOptions.appendChild(b);
   });
+
+  // accessibility: mark options container and set first option tabbable
+  elOptions.setAttribute('role', 'listbox');
+  elOptions.setAttribute('aria-label', 'Answer options');
+  const firstBtn = elOptions.querySelector('button');
+  if (firstBtn) firstBtn.setAttribute('tabindex', '0');
 
   elCurrentQ.innerText = idx + 1;
   elNext.disabled = true;
@@ -150,16 +169,20 @@ function chooseOption(btn, selected) {
   // disable all option buttons
   const btns = $all('#options button');
   btns.forEach(b => b.disabled = true);
+  // update aria-disabled
+  btns.forEach(b => b.setAttribute('aria-disabled', 'true'));
 
   const correctAnswer = questions[idx].answer;
 
   if (selected === correctAnswer) {
     btn.classList.add('correct');
+    btn.setAttribute('aria-selected', 'true');
     correct++;
     // tiny pop
     btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 200 });
   } else {
     btn.classList.add('wrong');
+    btn.setAttribute('aria-selected', 'true');
     wrong++;
     // show correct
     const found = btns.find(b => b.innerText.trim() === String(correctAnswer).trim());
@@ -176,6 +199,66 @@ function chooseOption(btn, selected) {
   // enable next
   elNext.disabled = false;
 }
+
+/* ====== Order toggle (static vs random) ====== */
+function loadOrderToggle() {
+  if (!orderToggle) return;
+  orderToggle.innerText = orderMode === 'random' ? 'Shuffle: On' : 'Shuffle: Off';
+  orderToggle.setAttribute('aria-pressed', orderMode === 'random' ? 'true' : 'false');
+  orderToggle.addEventListener('click', () => {
+    orderMode = orderMode === 'random' ? 'static' : 'random';
+    localStorage.setItem('mcq_order', orderMode);
+    loadOrderToggle();
+    // re-init quiz to apply new mode
+    initQuiz();
+  });
+}
+
+/* ====== Keyboard & focus management for options ====== */
+function focusOptionAt(offset) {
+  const opts = $all('#options button');
+  if (opts.length === 0) return;
+  const active = document.activeElement;
+  let i = opts.indexOf(active);
+  if (i === -1) i = 0;
+  let ni = i + offset;
+  if (ni < 0) ni = 0;
+  if (ni >= opts.length) ni = opts.length - 1;
+  opts.forEach((b, idx) => b.setAttribute('tabindex', idx === ni ? '0' : '-1'));
+  opts[ni].focus();
+}
+
+document.addEventListener('keydown', (ev) => {
+  const active = document.activeElement;
+  if (!active) return;
+  // only intercept when focus is inside options container
+  if (!document.querySelector('#options')?.contains(active)) return;
+
+  if (ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
+    ev.preventDefault();
+    focusOptionAt(1);
+  } else if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') {
+    ev.preventDefault();
+    focusOptionAt(-1);
+  } else if (ev.key === 'Home') {
+    ev.preventDefault();
+    const opts = $all('#options button');
+    opts.forEach((b, idx) => b.setAttribute('tabindex', idx === 0 ? '0' : '-1'));
+    opts[0].focus();
+  } else if (ev.key === 'End') {
+    ev.preventDefault();
+    const opts = $all('#options button');
+    const last = opts.length - 1;
+    opts.forEach((b, idx) => b.setAttribute('tabindex', idx === last ? '0' : '-1'));
+    opts[last].focus();
+  } else if (ev.key === ' ' || ev.key === 'Enter') {
+    // space or enter activates the focused option
+    if (active && active.tagName === 'BUTTON' && active.closest('#options')) {
+      ev.preventDefault();
+      active.click();
+    }
+  }
+});
 
 /* ====== Next question handler ====== */
 elNext.addEventListener('click', () => {
@@ -298,5 +381,6 @@ document.addEventListener('keydown', (ev) => {
 /* ====== Init on DOM ready ====== */
 document.addEventListener('DOMContentLoaded', () => {
   loadTheme();
+  loadOrderToggle();
   loadQuestions();
 });

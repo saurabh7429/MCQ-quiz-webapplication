@@ -13,38 +13,15 @@
 
     <!-- ===== HEADER ===== -->
     <header class="header">
-
-        <h1>MCQ Quiz</h1>
-
-        <div class="header-controls">
-            <button id="resetBtn" title="Reset Quiz">🔄</button>
-            <button id="themeToggle" title="Toggle Theme">🌙</button>
-            <button id="fullscreenBtn" title="Fullscreen">⛶</button>
-        </div>
-
+        <button id="themeToggle" title="Toggle Theme" class="top-btn">🌙</button>
+        <button id="fullscreenBtn" title="Fullscreen" class="top-btn">⛶</button>
     </header>
 
-
-    <!-- ===== LIVE STATS BAR ===== -->
-    <section class="stats-bar">
-
-        <div class="progress-info">
-            Question <span id="currentQ">1</span> /
-            <span id="totalQ">0</span>
-        </div>
-
-        <div class="score-info">
-            ✅ <span id="liveCorrect">0</span>
-            ❌ <span id="liveWrong">0</span>
-        </div>
-
-    </section>
+    <!-- ===== HEADING ===== -->
+    <h1 class="app-title">MCQ Quiz</h1>
 
 
-    <!-- ===== PROGRESS BAR ===== -->
-    <div class="progress-container">
-        <div id="progressFill"></div>
-    </div>
+
 
 
     <!-- ===== QUIZ AREA ===== -->
@@ -64,6 +41,27 @@
 
     </main>
 
+    <!-- ===== PROGRESS BAR ===== -->
+    <div class="progress-container">
+        <div id="progressFill"></div>
+    </div>
+
+    <!-- ===== LIVE STATS BAR ===== -->
+    <section class="stats-bar">
+        <div class="progress-info">
+            Question <span id="currentQ">1</span> / <span id="totalQ">0</span>
+        </div>
+        <div class="score-info">
+            ✅ Correct: <span id="liveCorrect">0</span>  |  ❌ Wrong: <span id="liveWrong">0</span>
+        </div>
+    </section>
+
+
+    <!-- ===== BOTTOM CONTROLS ===== -->
+    <footer class="footer-controls">
+        <button id="resetBtn" title="Reset Quiz">🔄</button>
+        <button id="orderToggle" title="Toggle question order">Shuffle</button>
+    </footer>
 
     <!-- ===== SCOREBOARD ===== -->
     <section id="scoreboard" class="scoreboard hidden">
