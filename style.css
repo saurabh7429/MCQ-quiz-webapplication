@@ -17,6 +17,7 @@
     --bg-grad-1: #f0f4f8;
     --bg-grad-2: #f8fafb;
     --accent-glow: rgba(37,99,235,0.08);
+    --publisher: rgba(26,32,44,0.72);
 }
 
 .dark {
@@ -35,6 +36,7 @@
     --border: rgba(230,238,249,0.04);
     --accent-glow: rgba(58,160,255,0.06);
     --shadow: 0 14px 36px rgba(2,6,23,0.65);
+    --publisher: rgba(230,238,249,0.86);
 }
 
 /* ===============================
@@ -86,12 +88,13 @@ body {
 
 /* Publisher link at top-left (no border) */
 .publisher {
-    color: var(--muted);
+    color: var(--publisher);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.95rem;
     align-self: center;
     padding: 6px 8px;
+    flex: 0 0 auto;
 }
 .publisher:hover {
     opacity: 0.95;
@@ -102,6 +105,13 @@ body {
     display: flex;
     gap: 12px;
     align-items: center;
+}
+
+/* Keep header buttons compact and horizontally aligned across screen sizes */
+.header-actions .top-btn {
+    flex: 0 0 auto;
+    min-width: 44px;
+    padding: 10px 12px;
 }
 
 .top-btn {
@@ -424,17 +434,20 @@ body {
     .app-title { font-size: 1.7rem; margin-bottom: 24px; }
     .quiz-area { border-radius: 12px; padding: 18px; margin-bottom: 2px; }
     .options-container { gap: 12px; margin-bottom: 18px; }
-    .top-btn { padding: 12px 14px; font-size: 15px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .top-btn { padding: 12px 14px; font-size: 15px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .footer-controls { gap: 8px; display: flex; }
     .footer-controls button { padding: 12px 14px; font-size: 13px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .stats-bar { font-size: 14px; padding: 12px; }
+
+    /* Ensure header buttons don't expand to full width on mobile */
+    .header-actions .top-btn { flex: 0 0 auto; }
 }
 
 /* Extra large spacing for single-button mobile view */
 @media (max-width: 480px) {
     .app-title { font-size: 1.5rem; margin-bottom: 20px; }
     .header { margin-bottom: 16px; gap: 6px; display: flex; }
-    .top-btn { padding: 12px; font-size: 14px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .top-btn { padding: 12px; font-size: 14px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .footer-controls { margin-top: 16px; gap: 6px; display: flex; }
     .footer-controls button { padding: 12px; font-size: 13px; flex: 1; min-height: 44px; display: flex; align-items: center; justify-content: center; }
     .quiz-area { padding: 16px; }
