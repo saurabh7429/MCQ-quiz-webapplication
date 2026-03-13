@@ -151,6 +151,20 @@ body {
   color: var(--text-primary);
 }
 
+.btn-custom {
+  background: linear-gradient(135deg, var(--primary-color), #df8f52);
+  color: white;
+  border: none;
+  grid-column: 1 / -1;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.btn-custom:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
 .btn-icon {
   width: 40px;
   height: 40px;
@@ -530,6 +544,33 @@ body {
 
 .button-group .btn {
   flex: 1;
+}
+
+/* Learn Mode Styles */
+
+.learn-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.learn-option {
+  cursor: default !important;
+}
+
+.learn-option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.learn-option:hover:not(:disabled) {
+  border-color: var(--primary-color);
+  background: #f5f1ea;
+  transform: translateX(4px);
 }
 
 /* ============================================================================

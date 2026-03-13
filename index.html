@@ -17,6 +17,13 @@
         </header>
 
         <div class="mode-selector">
+          <div class="mode-card" id="modeLearn">
+            <div class="mode-icon">📖</div>
+            <h2>Learn Mode</h2>
+            <p>Read and study all MCQs with correct answers shown</p>
+            <button class="btn btn-primary" onclick="initLearnMode('all')">Start</button>
+          </div>
+
           <div class="mode-card" id="modeAll">
             <div class="mode-icon">📚</div>
             <h2>Quiz All</h2>
@@ -47,7 +54,7 @@
             <button class="option-btn" onclick="setQuestionCount(50)">50 Questions</button>
             <button class="option-btn" onclick="setQuestionCount(100)">100 Questions</button>
             <input type="number" id="customCount" placeholder="Enter custom number" min="1">
-            <button class="option-btn" onclick="setQuestionCount(null)">Use Custom</button>
+            <button class="btn btn-custom" onclick="setQuestionCount(null)">⚡ Use Custom Number</button>
           </div>
           <button class="btn btn-secondary" onclick="backToModes()">Back</button>
         </div>
@@ -60,10 +67,11 @@
             <button class="option-btn" onclick="setExamQuestionCount(50)">50 Questions</button>
             <button class="option-btn" onclick="setExamQuestionCount(100)">100 Questions</button>
             <input type="number" id="customExamCount" placeholder="Enter custom number" min="1">
-            <button class="option-btn" onclick="setExamQuestionCount(null)">Use Custom</button>
+            <button class="btn btn-custom" onclick="setExamQuestionCount(null)">⚡ Use Custom Number</button>
           </div>
           <button class="btn btn-secondary" onclick="backToModes()">Back</button>
         </div>
+
       </div>
     </section>
 
@@ -117,6 +125,49 @@
           <!-- Next Button -->
           <div class="button-group">
             <button id="nextBtn" class="btn btn-secondary hidden" onclick="nextQuestion()">Next Question</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning/Read Mode Screen -->
+    <section id="learnScreen" class="screen">
+      <div class="learn-container">
+        <!-- Header -->
+        <div class="quiz-header">
+          <div class="header-left">
+            <button class="btn btn-icon" onclick="toggleFullscreen()" title="Toggle fullscreen">🖥️</button>
+            <h2>Learn Mode</h2>
+          </div>
+          <div class="header-right">
+            <button class="btn btn-icon" onclick="backToSetup()" title="Exit learning">❌</button>
+          </div>
+        </div>
+
+        <!-- Progress Info -->
+        <div class="progress-section">
+          <div class="progress-info">
+            <span id="learnQuestionCounter">0/0</span>
+          </div>
+        </div>
+
+        <!-- Question Display -->
+        <div class="question-container">
+          <div class="question-header">
+            <span class="question-number" id="learnQuestionNumber">Question 1</span>
+            <span class="question-category" id="learnQuestionCategory"></span>
+          </div>
+          <p class="question-text" id="learnQuestionText">Loading question...</p>
+
+          <!-- Options (Read-Only) -->
+          <div class="options-grid" id="learnOptionsGrid">
+            <!-- Options will be inserted here -->
+          </div>
+
+          <!-- Navigation Buttons -->
+          <div class="button-group">
+            <button id="learnPrevBtn" class="btn btn-secondary" onclick="previousLearnQuestion()">← Previous</button>
+            <button id="learnNextBtn" class="btn btn-secondary" onclick="nextLearnQuestion()">Next →</button>
           </div>
         </div>
       </div>

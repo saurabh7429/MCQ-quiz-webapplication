@@ -44,6 +44,14 @@ const scoreDisplay = document.getElementById('scoreDisplay');
 const progressCorrect = document.getElementById('progressCorrect');
 const progressIncorrect = document.getElementById('progressIncorrect');
 
+const learnQuestionText = document.getElementById('learnQuestionText');
+const learnQuestionNumber = document.getElementById('learnQuestionNumber');
+const learnQuestionCategory = document.getElementById('learnQuestionCategory');
+const learnOptionsGrid = document.getElementById('learnOptionsGrid');
+const learnQuestionCounter = document.getElementById('learnQuestionCounter');
+const learnPrevBtn = document.getElementById('learnPrevBtn');
+const learnNextBtn = document.getElementById('learnNextBtn');
+
 const percentageScore = document.getElementById('percentageScore');
 const scoreMessage = document.getElementById('scoreMessage');
 const totalQuestionsDisplay = document.getElementById('totalQuestionsDisplay');
@@ -51,6 +59,15 @@ const correctCountDisplay = document.getElementById('correctCountDisplay');
 const incorrectCountDisplay = document.getElementById('incorrectCountDisplay');
 const accuracyDisplay = document.getElementById('accuracyDisplay');
 const reviewContainer = document.getElementById('reviewContainer');
+
+// ============================================================================
+// LEARN MODE STATE
+// ============================================================================
+
+const learnState = {
+  currentIndex: 0,
+  sessionQuestions: [],
+};
 
 // ============================================================================
 // INITIALIZATION
@@ -455,4 +472,73 @@ function shuffleArray(array) {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled;
+}
+
+// ============================================================================
+// LEARN MODE FUNCTIONS
+// ============================================================================
+
+function initLearnMode(count) {
+  if (quizState.allQuestions.length === 0) {
+    alert('No questions loaded. Please reload the page.');
+    return;
+  }
+
+  learnState.currentIndex = 0;
+  
+  if (count === 'all') {
+    learnState.sessionQuestions = [...quizState.allQuestions];
+  } else {
+    const maxQuestions = quizState.allQuestions.length;
+    const actualCount = Math.min(count, maxQuestions);
+    learnState.sessionQuestions = shuffleArray(quizState.allQuestions).slice(0, actualCount);
+  }
+
+  displayLearnQuestion();
+  showScreen('learnScreen');
+}
+
+function displayLearnQuestion() {
+  const question = learnState.sessionQuestions[learnState.currentIndex];
+  
+  if (!question) return;
+
+  // Update question display
+  learnQuestionNumber.textContent = `Question ${learnState.currentIndex + 1}`;
+  learnQuestionText.textContent = question.question;
+  learnQuestionCategory.textContent = question.category || '';
+
+  // Display options with correct answer pre-selected (highlighted)
+  learnOptionsGrid.innerHTML = '';
+  question.options.forEach((option, index) => {
+    const optionBtn = document.createElement('button');
+    optionBtn.className = 'option-btn learn-option';
+    if (option === question.answer) {
+      optionBtn.classList.add('correct');
+    }
+    optionBtn.textContent = option;
+    optionBtn.disabled = true; // Read-only
+    learnOptionsGrid.appendChild(optionBtn);
+  });
+
+  // Update counter
+  learnQuestionCounter.textContent = `${learnState.currentIndex + 1}/${learnState.sessionQuestions.length}`;
+
+  // Update button visibility
+  learnPrevBtn.disabled = learnState.currentIndex === 0;
+  learnNextBtn.disabled = learnState.currentIndex === learnState.sessionQuestions.length - 1;
+}
+
+function nextLearnQuestion() {
+  if (learnState.currentIndex < learnState.sessionQuestions.length - 1) {
+    learnState.currentIndex++;
+    displayLearnQuestion();
+  }
+}
+
+function previousLearnQuestion() {
+  if (learnState.currentIndex > 0) {
+    learnState.currentIndex--;
+    displayLearnQuestion();
+  }
 }
